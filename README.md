@@ -32,7 +32,7 @@ results.
 | Assembly polishing                                  | ViPR Tools                          |
 | Mapping to assembly                                 | BWA, LoFreq                         |
 | Low frequency variant calling                       | LoFreq                              |
-| Coverage and variant AF plots (two processes)       | Bedtools, ViPR Tools                |
+| Coverage and variant AF plots                       | Bedtools, ViPR Tools                |
 
 
 
@@ -50,11 +50,11 @@ Documentation about the pipeline can be found in the `docs/` directory:
 This pipeline was originally developed at the
 [Genome Institute of Singapore](http://a-star.edu.sg/gis) by
 [Andreas Wilm](https://github.com/andreas-wilm/). It started out as an
-ecosystem around LoFreq an went through a couple of iterations. The
+ecosystem around LoFreq and went through a couple of iterations. The
 current version had three predecessors
 [ViPR 1](https://github.com/CSB5/vipr),
 [ViPR 2](https://github.com/CSB5/vipr2) and
-[ViPR 3](https://github.com/gis-rpd/pipelines/tree/master/germs/vipr)
+[ViPR 3](https://github.com/gis-rpd/pipelines/tree/master/germs/vipr).
 
 An incomplete list of publications using (previous versions of) ViPR:
 
