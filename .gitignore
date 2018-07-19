@@ -19,3 +19,5 @@ tests/out-wrong/
 *#
 *DS_Store
 tests/.snakemake/
+awsprofile.config
+
