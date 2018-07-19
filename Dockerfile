@@ -3,6 +3,8 @@ MAINTAINER Andreas Wilm <wilma@gis.a-star.edu.sg>
 LABEL authors="wilma@gis.a-star.edu.sg" \
     description="Docker image containing all requirements for the nf-core/vipr pipeline"
 
+RUN apt-get update && apt-get install -y awscli && apt-get clean -y 
+
 COPY environment.yml /
 RUN conda env create -f /environment.yml && conda clean -a
 ENV PATH /opt/conda/envs/nfcore-vipr-1.0-dev/bin:$PATH

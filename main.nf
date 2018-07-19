@@ -25,7 +25,6 @@ try {
 }
 
 
-
 /* Input validation
  */
 input_ref_fasta = file(params.ref_fasta)
@@ -144,6 +143,7 @@ if(!params.skip_kraken) {
         
         input:
             set sample_id, file(fq1), file(fq2) from fastq_for_kraken_ch
+            file(kraken_db)
         output:
             file("${sample_id}_kraken.report")
         script:
