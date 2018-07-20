@@ -86,7 +86,7 @@ Channel
  */
 process trim_and_combine {
     tag { "Preprocessing of " + reads.size()/2 + "  read pairs for " + sample_id }
-    //publishDir "${params.outdir}/${sample_id}/reads/", mode: 'copy'
+    //publishDir "${params.publishdir}/${sample_id}/reads/", mode: 'copy'
 
     input:
         set sample_id, file(reads) from fastq_ch
@@ -113,7 +113,7 @@ process trim_and_combine {
  */
 process decont {
     tag { "Decontaminating " + sample_id }
-    publishDir "${params.outdir}/${sample_id}/reads/", mode: 'copy'
+    publishDir "${params.publishdir}/${sample_id}/reads/", mode: 'copy'
     
     input:
         set sample_id, file(fq1), file(fq2) from trim_and_combine_ch
@@ -139,7 +139,7 @@ process decont {
 if(!params.skip_kraken) {
     process kraken {
         tag { "Running Kraken on " + sample_id }
-        publishDir "${params.outdir}/${sample_id}/", mode: 'copy'
+        publishDir "${params.publishdir}/${sample_id}/", mode: 'copy'
         
         input:
             set sample_id, file(fq1), file(fq2) from fastq_for_kraken_ch
@@ -163,7 +163,7 @@ if(!params.skip_kraken) {
  */
 process tadpole {
     tag { "Tadpole assembly of " + sample_id }
-    publishDir "${params.outdir}/${sample_id}/", mode: 'copy'
+    publishDir "${params.publishdir}/${sample_id}/", mode: 'copy'
     
     input:
         set sample_id, file(fq1), file(fq2) from fastq_for_tadpole
@@ -180,7 +180,7 @@ process tadpole {
  */
 process gap_fill_assembly {
     tag { "Orienting and gap filling contigs for " + sample_id }
-    publishDir "${params.outdir}/${sample_id}/", mode: 'copy'
+    publishDir "${params.publishdir}/${sample_id}/", mode: 'copy'
     // capture special error code, telling us that we cannot proceed for valid reasons.
     // meaning of consequently missing downstream files needs to be reflected in docs
     errorStrategy = { task.exitStatus == 3 ? 'ignore' : 'terminate' }
@@ -213,7 +213,7 @@ process gap_fill_assembly {
  */
 process polish_assembly {
     tag { "Polishing assembly for " + sample_id }
-    publishDir "${params.outdir}/${sample_id}/", mode: 'copy'
+    publishDir "${params.publishdir}/${sample_id}/", mode: 'copy'
     
     input:
         set sample_id, file(assembly_fa), file(assembly_gaps_bed), file(fq1), file(fq2) \
@@ -235,7 +235,7 @@ process polish_assembly {
  */
 process final_mapping {
     tag { "Mapping to polished assembly for " + sample_id }
-    publishDir "${params.outdir}/${sample_id}/", mode: 'copy'
+    publishDir "${params.publishdir}/${sample_id}/", mode: 'copy'
 
     input:
         set sample_id, file(ref_fa), file(fq1), file(fq2) \
@@ -263,7 +263,7 @@ process final_mapping {
  */
 process var_calling {
     tag { "Final variant calling for " + sample_id }
-    publishDir "${params.outdir}/${sample_id}/", mode: 'copy'
+    publishDir "${params.publishdir}/${sample_id}/", mode: 'copy'
 
     input:
         set sample_id, file(ref_fa), file(bam), file(bai) from final_mapping_for_vcf_ch
@@ -284,7 +284,7 @@ process var_calling {
  */
 process genomecov {
     tag { "Genome coverage for " + sample_id }
-    publishDir "${params.outdir}/${sample_id}/", mode: 'copy'
+    publishDir "${params.publishdir}/${sample_id}/", mode: 'copy'
 
     input:
         set sample_id, file(ref_fa), file(bam), file(bai) from final_mapping_for_cov_ch
@@ -302,7 +302,7 @@ process genomecov {
  */
 process vipr_tools {
     tag { "Plotting AF vs. coverage and readying fasta for  " + sample_id }
-    publishDir "${params.outdir}/${sample_id}/", mode: 'copy'
+    publishDir "${params.publishdir}/${sample_id}/", mode: 'copy'
 
     input:
         set sample_id, file(cov), file(ref_fa), file(vcf) from cov_ch.join(vcf_ch)
