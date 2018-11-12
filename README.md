@@ -1,12 +1,12 @@
 # ![nf-core/vipr](docs/images/vipr_logo.png)
 
 [![Build Status](https://travis-ci.org/nf-core/vipr.svg?branch=master)](https://travis-ci.org/nf-core/vipr)
-[![Nextflow](https://img.shields.io/badge/nextflow-%E2%89%A50.27.6-brightgreen.svg)](https://www.nextflow.io/)
+[![Nextflow](https://img.shields.io/badge/nextflow-%E2%89%A50.31.1-brightgreen.svg)](https://www.nextflow.io/)
 [![Gitter](https://img.shields.io/badge/gitter-%20join%20chat%20%E2%86%92-4fb99a.svg)](https://gitter.im/nf-core/Lobby)
-[![Docker Container available](https://img.shields.io/docker/automated/nfcore/vipr.svg)](https://hub.docker.com/r/nfcore/vipr/)
-![Singularity Container available](
-https://img.shields.io/badge/singularity-available-7E4C74.svg)
 
+[![install with bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg)](http://bioconda.github.io/)
+[![Docker Container available](https://img.shields.io/docker/automated/nfcore/vipr.svg)](https://hub.docker.com/r/nfcore/vipr/)
+[![https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg](https://www.singularity-hub.org/static/img/hosted-singularity--hub-%23e32929.svg)](https://singularity-hub.org/collections/1405)
 
 ### Introduction
 
@@ -14,12 +14,7 @@ https://img.shields.io/badge/singularity-available-7E4C74.svg)
 for assembly and intrahost / low-frequency variant calling for viral
 samples.
 
-The pipeline uses [Nextflow](https://www.nextflow.io), a
-bioinformatics workflow tool. It pre-processes raw data from FastQ
-inputs, aligns the reads and performs extensive quality-control on the
-results.
-
-
+The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool to run tasks across multiple compute infrastructures in a very portable manner. It comes with docker / singularity containers making installation trivial and results highly reproducible.
 
 ### Pipeline Steps
 
@@ -27,14 +22,12 @@ results.
 |-----------------------------------------------------|-------------------------------------|
 | Trimming, combining of read-pairs per sample and QC | Skewer, FastQC                      |
 | Decontamination                                     | decont                              |
-| Metagenomics classifcation / Sample purity          | Kraken                              |
+| Metagenomics classification / Sample purity         | Kraken                              |
 | Assembly to contigs                                 | BBtools' Tadpole                    |
 | Assembly polishing                                  | ViPR Tools                          |
 | Mapping to assembly                                 | BWA, LoFreq                         |
 | Low frequency variant calling                       | LoFreq                              |
 | Coverage and variant AF plots                       | Bedtools, ViPR Tools                |
-
-
 
 ### Documentation
 
@@ -43,7 +36,6 @@ Documentation about the pipeline can be found in the `docs/` directory:
 1. [Installation and configuration](docs/installation.md)
 2. [Running the pipeline](docs/usage.md)
 3. [Output and how to interpret the results](docs/output.md)
-
 
 ### Credits
 
@@ -68,22 +60,3 @@ Plenty of people provided essential feedback, including:
 - ZHU Yuan
 - Shuzhen SIM
 - CHU Wenhan Collins
-
-### Participating Institutes
-
-nfcore/vipr is used mainly by the Bioinformatics Core of the Genome
-Institue of Singapore. If you use this pipeline too, please let us
-know in an issue and we will add you to the list.
-
-<table>
-  <tr>
-    <td><img src="docs/images/gis_logo.png" width="100"></td>
-    <td>Genome Institute of Singapore</td>
-    <td>https://www.a-star.edu.sg/gis/</td>
-  </tr>
-  <tr>
-    <td><img src="docs/images/igap_logo.png" width="100"></td>
-    <td>iGap</td>
-    <td>http://www.igap.io</td>
-  </tr>
-</table>
