@@ -330,7 +330,7 @@ process var_calling {
  */
 process genomecov {
     tag { "Genome coverage for " + sample_id }
-    publishDir "${params.outdirdir}/${sample_id}/", mode: 'copy'
+    publishDir "${params.outdir}/${sample_id}/", mode: 'copy'
 
     input:
         set sample_id, file(ref_fa), file(bam), file(bai) from final_mapping_for_cov_ch
