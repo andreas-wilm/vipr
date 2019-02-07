@@ -4,10 +4,10 @@ Bootstrap:docker
 %labels
     MAINTAINER Andreas Wilm <wilma@gis.a-star.edu.sg>
     DESCRIPTION Singularity image containing all requirements for the nf-core/vipr pipeline
-    VERSION 1.0dev
+    VERSION latest
 
 %environment
-    PATH=/opt/conda/envs/nf-core-vipr-1.0dev/bin:$PATH
+    PATH=/opt/conda/envs/nf-core-vipr-latest/bin:$PATH
     export PATH
 
 %files
